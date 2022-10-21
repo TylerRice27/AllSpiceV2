@@ -10,7 +10,7 @@ CREATE TABLE
 
 CREATE TABLE
     IF NOT EXISTS tjrecipes(
-        id INT NOT NULL primary key COMMENT 'primary key',
+        id INT NOT NULL primary key AUTO_INCREMENT COMMENT 'primary key',
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
         title VARCHAR(255) NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE
 
 CREATE TABLE
     IF NOT EXISTS tjingredients(
-        id INT NOT NULL primary key COMMENT 'primary key',
+        id INT NOT NULL primary key AUTO_INCREMENT COMMENT 'primary key',
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
         name VARCHAR(255) NOT NULL,
@@ -32,6 +32,7 @@ CREATE TABLE
 
 CREATE TABLE
     tjfavorite(
+        id INT NOT NULL primary key AUTO_INCREMENT,
         accountId VARCHAR(255) NOT NULL,
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
