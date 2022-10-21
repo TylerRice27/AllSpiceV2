@@ -27,7 +27,7 @@ CREATE TABLE
         name VARCHAR(255) NOT NULL,
         quantity VARCHAR(255) NOT NULL,
         recipeId INT NOT NULL,
-        Foreign Key (recipedId) REFERENCES tjrecipes(id) ON DELETE CASCADE
+        Foreign Key (recipeId) REFERENCES tjrecipes(id) ON DELETE CASCADE
     ) default charset utf8 COMMENT '';
 
 CREATE TABLE
@@ -37,5 +37,5 @@ CREATE TABLE
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
         recipeId INT NOT NULL,
         Foreign Key (accountId) REFERENCES accounts(id) ON DELETE CASCADE,
-        Foreign Key (recipedId) REFERENCES tjrecipes(id) ON DELETE CASCADE
+        Foreign Key (recipeId) REFERENCES tjrecipes(id) ON DELETE CASCADE
     ) default charset utf8 COMMENT '';
