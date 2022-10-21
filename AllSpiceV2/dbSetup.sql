@@ -16,7 +16,9 @@ CREATE TABLE
         title VARCHAR(255) NOT NULL,
         img VARCHAR(255) NOT NULL,
         instructions VARCHAR(255),
-        category VARCHAR(255)
+        category VARCHAR(255),
+        creatorId VARCHAR(255) NOT NULL,
+        Foreign Key (creatorId) REFERENCES accounts(id)
     ) default charset utf8 COMMENT '';
 
 CREATE TABLE

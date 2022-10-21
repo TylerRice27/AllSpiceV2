@@ -14,6 +14,8 @@ namespace AllSpiceV2.Models
 
         public string Category { get; set; }
 
+        public string CreatorId { get; set; }
+
 
 
     }

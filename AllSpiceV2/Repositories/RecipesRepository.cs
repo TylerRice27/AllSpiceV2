@@ -1,4 +1,6 @@
 using System.Data;
+using AllSpiceV2.Models;
+using Dapper;
 
 namespace AllSpiceV2.Repositories
 {
@@ -10,5 +12,19 @@ namespace AllSpiceV2.Repositories
         {
             _db = db;
         }
+
+        internal Recipe Create(Recipe newRecipe)
+        {
+
+            string sql = @"
+           INSERT INTO tjrecipes
+           (title, img, instructions, category, creatorId)
+           VALUES
+           (@Title, @Img, @Instructions, @Category, @CreatorId)";
+            _db.Execute(sql, newRecipe);
+            return newRecipe;
+
+        }
     }
+
 }
