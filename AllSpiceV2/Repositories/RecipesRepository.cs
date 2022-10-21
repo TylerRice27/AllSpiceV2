@@ -1,5 +1,6 @@
 using System.Data;
 using AllSpiceV2.Models;
+using Dapper;
 
 namespace AllSpiceV2.Repositories
 {
