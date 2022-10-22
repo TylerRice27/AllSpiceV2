@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AllSpiceV2.Models;
 using AllSpiceV2.Services;
@@ -33,8 +34,45 @@ namespace AllSpiceV2.Controllers
             {
                 Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
                 newRecipe.CreatorId = userInfo.Id;
-                Recipe jambajuice = _rs.Create(newRecipe);
-                return Ok(jambajuice);
+                Recipe recipe = _rs.Create(newRecipe);
+                return Ok(recipe);
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+
+        }
+
+        [HttpGet]
+
+        public ActionResult<List<Recipe>> GetAll()
+        {
+            try
+            {
+                List<Recipe> recipes = _rs.GetAll();
+                return Ok(recipes);
+
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+
+        }
+
+        [HttpGet("{id}")]
+
+        public ActionResult<Recipe> GetById(int id)
+        {
+
+            try
+            {
+                Recipe recipe = _rs.GetById(id);
+                return Ok(recipe);
+
             }
             catch (Exception e)
             {

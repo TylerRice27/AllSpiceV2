@@ -16,6 +16,8 @@ namespace AllSpiceV2.Models
 
         public string CreatorId { get; set; }
 
+        public Profile Creator { get; set; }
+
 
 
     }

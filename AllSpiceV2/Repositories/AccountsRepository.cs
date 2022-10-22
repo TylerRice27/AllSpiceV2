@@ -27,12 +27,6 @@ namespace AllSpiceV2.Repositories
 
         internal Account Create(Account newAccount)
         {
-            string sql = @"
-            INSERT INTO accounts
-              (name, picture, email, id)
-            VALUES
-              (@Name, @Picture, @Email, @Id)";
-            _db.Execute(sql, newAccount);
             return newAccount;
         }
 
