@@ -64,6 +64,12 @@ namespace AllSpiceV2.Repositories
             }).ToList();
         }
 
+        internal void Delete(int id)
+        {
+            string sql = " DELETE FROM tjrecipes WHERE id = @id;";
+            _db.Execute(sql, new { id });
+        }
+
         internal Recipe Edit(Recipe original)
         {
             string sql = @"
@@ -78,6 +84,8 @@ namespace AllSpiceV2.Repositories
             "; _db.Execute(sql, original);
             return original;
         }
+
+
     }
 
 }

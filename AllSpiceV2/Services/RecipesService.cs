@@ -26,7 +26,13 @@ namespace AllSpiceV2.Services
 
         internal Recipe GetById(int id)
         {
-            return _repo.GetById(id);
+
+            Recipe recipe = _repo.GetById(id);
+            if (recipe == null)
+            {
+                throw new Exception("No Recipe by That Id");
+            }
+            return recipe;
         }
 
         internal Recipe Edit(Recipe update, string userId)
@@ -44,6 +50,19 @@ namespace AllSpiceV2.Services
 
             return _repo.Edit(original);
 
+        }
+
+        internal string Delete(int id, string userId)
+        {
+
+            Recipe original = GetById(id);
+            if (original.CreatorId != userId)
+            {
+                throw new Exception("You can not delete this recipe");
+
+            }
+            _repo.Delete(id);
+            return $"You deleted {original.Title}";
         }
     }
 }

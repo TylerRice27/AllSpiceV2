@@ -103,5 +103,21 @@ namespace AllSpiceV2.Controllers
 
         }
 
+        [HttpDelete("{id}")]
+        [Authorize]
+        public async Task<ActionResult<string>> Delete(int id)
+        {
+            try
+            {
+                Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+                string message = _rs.Delete(id, userInfo.Id);
+                return Ok(message);
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
     }
 }
