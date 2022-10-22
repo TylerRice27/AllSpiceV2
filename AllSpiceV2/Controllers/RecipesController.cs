@@ -81,5 +81,27 @@ namespace AllSpiceV2.Controllers
             }
 
         }
+
+        [HttpPut("{id}")]
+        [Authorize]
+
+        public async Task<ActionResult<Recipe>> Edit(int id, [FromBody] Recipe update)
+        {
+            try
+            {
+                Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+                update.Id = id;
+                Recipe recipe = _rs.Edit(update, userInfo.Id);
+                return Ok(recipe);
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+
+
+        }
+
     }
 }

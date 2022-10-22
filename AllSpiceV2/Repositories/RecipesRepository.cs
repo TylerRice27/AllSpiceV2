@@ -33,7 +33,14 @@ namespace AllSpiceV2.Repositories
 
         internal Recipe GetById(int id)
         {
-            string sql = "SELECT * FROM tjrecipes WHERE id = @id";
+            string sql = @"
+            SELECT
+            r.*,
+            a.*
+            FROM tjrecipes r
+            JOIN accounts a ON a.id = r.creatorId
+            WHERE r.id = @id;
+            ";
             return _db.Query<Recipe, Profile, Recipe>(sql, (recipe, profile) =>
             {
                 recipe.Creator = profile;
@@ -55,6 +62,21 @@ namespace AllSpiceV2.Repositories
                 recipe.Creator = profile;
                 return recipe;
             }).ToList();
+        }
+
+        internal Recipe Edit(Recipe original)
+        {
+            string sql = @"
+            UPDATE tjrecipes
+            SET
+            title = @Title,
+            img = @Img,
+            instructions = @Instructions,
+            category = @Category,
+            updatedAt = @UpdatedAt
+            WHERE id = @Id;
+            "; _db.Execute(sql, original);
+            return original;
         }
     }
 
