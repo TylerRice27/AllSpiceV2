@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using AllSpiceV2.Models;
 using AllSpiceV2.Repositories;
 
@@ -15,6 +16,13 @@ namespace AllSpiceV2.Services
         internal Ingredient Create(Ingredient newIngredient)
         {
             return _repo.Create(newIngredient);
+        }
+
+        public List<Ingredient> GetIngredientsByRecipe(int recipeId)
+        {
+
+            return _repo.GetIngredientsByRecipe(recipeId);
+
         }
     }
 }
