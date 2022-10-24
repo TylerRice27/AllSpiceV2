@@ -16,11 +16,14 @@ namespace AllSpiceV2.Controllers
 
         private readonly RecipesService _rs;
 
+        private readonly IngredientsService _is;
+
         private readonly Auth0Provider _auth0Provider;
 
-        public RecipesController(RecipesService rs, Auth0Provider auth0Provider)
+        public RecipesController(RecipesService rs, IngredientsService @is, Auth0Provider auth0Provider)
         {
             _rs = rs;
+            _is = @is;
             _auth0Provider = auth0Provider;
         }
 
@@ -81,6 +84,27 @@ namespace AllSpiceV2.Controllers
             }
 
         }
+
+        [HttpGet("{id}/ingredients")]
+        public ActionResult<List<Ingredient>> GetIngredientsByRecipe(int recipeId)
+
+        {
+            // NOTE Come back here and check good eats
+            try
+            {
+                List<Ingredient> ingredients = _is.GetIngredientsByRecipe(recipeId);
+                return Ok(ingredients);
+
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+
+
+        }
+
 
         [HttpPut("{id}")]
         [Authorize]
