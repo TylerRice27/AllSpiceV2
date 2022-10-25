@@ -41,6 +41,7 @@ namespace AllSpiceV2.Services
         internal Ingredient Delete(int id, string userId)
         {
             Ingredient original = this.GetById(id);
+            // Not required to pass postman test but this is business logic for security
             Recipe found = _rs.GetById(original.RecipeId);
             if (found.CreatorId != userId)
             {
