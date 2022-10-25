@@ -33,7 +33,7 @@ CREATE TABLE
     ) default charset utf8 COMMENT '';
 
 CREATE TABLE
-    tjfavorite(
+    tjfavorites(
         id INT NOT NULL primary key AUTO_INCREMENT,
         accountId VARCHAR(255) NOT NULL,
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
