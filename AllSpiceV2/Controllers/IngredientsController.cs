@@ -45,5 +45,33 @@ namespace AllSpiceV2.Controllers
 
         }
 
+
+        [HttpDelete("{id}")]
+        [Authorize]
+
+        public async Task<ActionResult<Ingredient>> Delete(int id)
+
+        {
+            try
+            {
+                Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+
+                Ingredient ingredient = _is.Delete(id, userInfo.Id);
+                // To return a message you need to return it in quotations or you can return the whole object
+                return Ok("Ingredient has been deleted");
+
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+
+        }
+
+
+
     }
+
+
 }

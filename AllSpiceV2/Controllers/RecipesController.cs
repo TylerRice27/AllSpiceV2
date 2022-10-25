@@ -86,13 +86,13 @@ namespace AllSpiceV2.Controllers
         }
 
         [HttpGet("{id}/ingredients")]
-        public ActionResult<List<Ingredient>> GetIngredientsByRecipe(int recipeId)
+        public ActionResult<List<Ingredient>> GetIngredientsByRecipe(int id)
 
         {
             // NOTE Come back here and check good eats
             try
             {
-                List<Ingredient> ingredients = _is.GetIngredientsByRecipe(recipeId);
+                List<Ingredient> ingredients = _is.GetIngredientsByRecipe(id);
                 return Ok(ingredients);
 
             }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using AllSpiceV2.Models;
 using Dapper;
 
@@ -27,16 +28,31 @@ namespace AllSpiceV2.Repositories
             return newIngredient;
         }
 
+        internal Ingredient GetById(int id)
+        {
+            string sql = @"
+            SELECT * FROM tjingredients
+            WHERE id = @id
+            ";
+            return _db.QueryFirstOrDefault<Ingredient>(sql, new { id });
+        }
+
+        internal void Delete(Ingredient original)
+        {
+            string sql = "DELETE FROM tjingredients WHERE id = @id LIMIT 1;";
+            _db.Execute(sql, original);
+
+        }
+
         internal List<Ingredient> GetIngredientsByRecipe(int recipeId)
         {
             string sql = @"
-            SELECT i.*, r.* FROM tjingredients i
-            JOIN tjrecipes ON r.id = i.recipeId
+            SELECT * 
+            FROM tjingredients 
             WHERE recipeId = @recipeId";
-            return _db.Query<Ingredient, Profile, Ingredient>(sql, (ingredient, profile) =>
-            {
-                ingredient.Re
-            }
+            return _db.Query<Ingredient>(sql, new { recipeId }).ToList();
+
+
         }
     }
 }
