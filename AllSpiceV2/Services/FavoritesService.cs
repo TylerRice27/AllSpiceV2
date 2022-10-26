@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using AllSpiceV2.Models;
 using AllSpiceV2.Repositories;
 
@@ -22,6 +23,11 @@ namespace AllSpiceV2.Services
 
             recipe.Id = newFavorite.RecipeId;
             return _repo.Create(newFavorite);
+        }
+
+        internal List<Favorite> GetAccountFavorites(string userId)
+        {
+            return _repo.GetAccountFavorites(userId);
         }
     }
 }

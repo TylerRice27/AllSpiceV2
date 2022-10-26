@@ -20,9 +20,9 @@ namespace AllSpiceV2.Repositories
 
             string sql = @"
            INSERT INTO tjrecipes
-           (title, createdAt, updatedAt, img, instructions, category, creatorId)
+           (title, img, instructions, category, creatorId)
            VALUES
-           (@Title, @CreatedAt, @UpdatedAt, @Img, @Instructions, @Category, @CreatorId);
+           (@Title, @Img, @Instructions, @Category, @CreatorId);
            SELECT LAST_INSERT_ID();";
 
             int id = _db.ExecuteScalar<int>(sql, newRecipe);

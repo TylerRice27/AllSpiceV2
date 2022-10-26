@@ -10,5 +10,8 @@ namespace AllSpiceV2.Models
 
         public int RecipeId { get; set; }
 
+        public Profile Creator { get; set; }
+
+
     }
 }

@@ -46,7 +46,6 @@ namespace AllSpiceV2.Services
             original.Instructions = update.Instructions ?? original.Instructions;
             original.Category = update.Category ?? original.Category;
             original.Img = update.Img ?? original.Img;
-            original.UpdatedAt = update.UpdatedAt ?? original.UpdatedAt;
 
             return _repo.Edit(original);
 
