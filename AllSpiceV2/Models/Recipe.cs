@@ -22,5 +22,14 @@ namespace AllSpiceV2.Models
 
 
 
+
     }
+
+    public class FavoriteViewModel : Recipe
+    {
+        public int FavoriteId { get; set; }
+
+
+    }
+
 }

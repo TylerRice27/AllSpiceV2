@@ -29,19 +29,23 @@ namespace AllSpiceV2.Repositories
             return newFavorite;
         }
 
-        internal List<Favorite> GetAccountFavorites(string userId)
+        internal List<FavoriteViewModel> GetAccountFavorites(string userId)
         {
-            string sql = @"SELECT
-            f.*,
-            a.*
+            string sql = @"
+            SELECT
+            a.*,
+            r.*,
+            f.id AS FavoriteId
             FROM tjfavorites f
-            JOIN accounts a on a.id = f.accountId;
+            JOIN tjrecipes r on r.id = f.recipeId
+            JOIN accounts a on a.id = r.creatorId
+            WHERE f.accountId = @userId;
             ";
-            return _db.Query<Favorite, Profile, Favorite>(sql, (fav, profile) =>
+            return _db.Query<Account, FavoriteViewModel, FavoriteViewModel>(sql, (profile, recipe) =>
             {
-                fav.Creator = profile;
-                return fav;
-            }).ToList();
+                recipe.Creator = profile;
+                return recipe;
+            }, new { userId }).ToList();
         }
     }
 }

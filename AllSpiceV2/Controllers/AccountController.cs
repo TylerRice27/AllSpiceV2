@@ -42,13 +42,13 @@ namespace AllSpiceV2.Controllers
 
         [HttpGet("favorites")]
         [Authorize]
-        public async Task<ActionResult<List<Account>>> GetFavorites()
+        public async Task<ActionResult<Account>> GetFavorites()
 
         {
             try
             {
                 Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
-                List<Favorite> favorites = _fs.GetAccountFavorites(userInfo.Id);
+                List<FavoriteViewModel> favorites = _fs.GetAccountFavorites(userInfo.Id);
                 return Ok(favorites);
             }
             catch (Exception e)

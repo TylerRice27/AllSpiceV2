@@ -25,7 +25,7 @@ namespace AllSpiceV2.Services
             return _repo.Create(newFavorite);
         }
 
-        internal List<Favorite> GetAccountFavorites(string userId)
+        internal List<FavoriteViewModel> GetAccountFavorites(string userId)
         {
             return _repo.GetAccountFavorites(userId);
         }
