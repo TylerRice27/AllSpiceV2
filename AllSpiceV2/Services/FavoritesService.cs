@@ -8,13 +8,19 @@ namespace AllSpiceV2.Services
 
         private readonly FavoritesRepository _repo;
 
-        public FavoritesService(FavoritesRepository repo)
+        private readonly RecipesService _rs;
+
+        public FavoritesService(FavoritesRepository repo, RecipesService rs)
         {
             _repo = repo;
+            _rs = rs;
         }
 
-        internal Favorite Create(Favorite newFavorite)
+        internal Favorite Create(Favorite newFavorite, string userId)
         {
+            Recipe recipe = _rs.GetById(newFavorite.RecipeId);
+
+            recipe.Id = newFavorite.RecipeId;
             return _repo.Create(newFavorite);
         }
     }

@@ -33,7 +33,7 @@ namespace AllSpiceV2.Controllers
             {
 
                 Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
-                Favorite favorite = _fs.Create(newFavorite);
+                Favorite favorite = _fs.Create(newFavorite, userInfo.Id);
                 return Ok(favorite);
             }
             catch (Exception e)

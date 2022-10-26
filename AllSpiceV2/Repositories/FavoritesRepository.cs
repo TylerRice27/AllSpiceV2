@@ -20,7 +20,7 @@ namespace AllSpiceV2.Repositories
             INSERT INTO tjfavorites
             (accountId, recipeId)
             VALUES
-            (@AccountId, @RecipeId)
+            (@AccountId, @RecipeId);
             SELECT LAST_INSERT_ID();";
             int id = _db.ExecuteScalar<int>(sql, newFavorite);
             newFavorite.Id = id;

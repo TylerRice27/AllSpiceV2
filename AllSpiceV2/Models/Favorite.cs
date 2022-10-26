@@ -8,7 +8,7 @@ namespace AllSpiceV2.Models
 
         public string AccountId { get; set; }
 
-        public string RecipeId { get; set; }
+        public int RecipeId { get; set; }
 
     }
 }
