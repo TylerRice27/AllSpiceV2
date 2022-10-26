@@ -46,5 +46,45 @@ namespace AllSpiceV2.Controllers
         }
 
 
+        [HttpGet("{id}")]
+        public ActionResult<Favorite> GetById(int id)
+        {
+            try
+            {
+                Favorite favorite = _fs.GetById(id);
+                return Ok(favorite);
+
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+
+
+        }
+
+
+
+
+        [HttpDelete("{id}")]
+        [Authorize]
+        public async Task<ActionResult<Favorite>> Delete(int id)
+
+        {
+
+            try
+            {
+                Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+                _fs.Delete(id, userInfo.Id);
+                return Ok($"Deleted Favorited Recipe");
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
+
     }
 }

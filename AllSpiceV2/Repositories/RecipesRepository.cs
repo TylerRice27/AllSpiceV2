@@ -66,7 +66,7 @@ namespace AllSpiceV2.Repositories
 
         internal void Delete(int id)
         {
-            string sql = " DELETE FROM tjrecipes WHERE id = @id;";
+            string sql = " DELETE FROM tjrecipes WHERE id = @id LIMIT 1";
             _db.Execute(sql, new { id });
         }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using AllSpiceV2.Models;
 using AllSpiceV2.Repositories;
@@ -28,6 +29,30 @@ namespace AllSpiceV2.Services
         internal List<FavoriteViewModel> GetAccountFavorites(string userId)
         {
             return _repo.GetAccountFavorites(userId);
+        }
+
+        internal void Delete(int id, string userId)
+        {
+            Favorite original = this.GetById(id);
+            if (original.AccountId != userId)
+            {
+                throw new Exception("You can not remove this favorite");
+
+            }
+            _repo.Delete(id);
+            // return $" {original.Creator.Name} unfavorited this recipe";
+
+        }
+
+        internal Favorite GetById(int id)
+        {
+            Favorite favorite = _repo.GetById(id);
+            if (favorite == null)
+            {
+
+                throw new Exception("No Favorite by that Id");
+            }
+            return favorite;
         }
     }
 }

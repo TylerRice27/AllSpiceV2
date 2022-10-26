@@ -47,5 +47,17 @@ namespace AllSpiceV2.Repositories
                 return recipe;
             }, new { userId }).ToList();
         }
+
+        internal void Delete(int id)
+        {
+            string sql = "DELETE FROM tjfavorites WHERE id = @id LIMIT 1";
+            _db.Execute(sql, new { id });
+        }
+
+        internal Favorite GetById(int id)
+        {
+            string sql = "SELECT * FROM tjfavorites WHERE tjfavorites.id = @id";
+            return _db.QueryFirstOrDefault<Favorite>(sql, new { id });
+        }
     }
 }
