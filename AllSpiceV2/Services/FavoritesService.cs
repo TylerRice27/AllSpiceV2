@@ -16,7 +16,7 @@ namespace AllSpiceV2.Services
             _rs = rs;
         }
 
-        internal Favorite Create(Favorite newFavorite, string userId)
+        internal Favorite Create(Favorite newFavorite)
         {
             Recipe recipe = _rs.GetById(newFavorite.RecipeId);
 
