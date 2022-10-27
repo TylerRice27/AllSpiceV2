@@ -16,6 +16,14 @@
 			<label>Category</label>
 			<input type="" class="form-control" />
 		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+				Close
+			</button>
+			<button type="button" class="btn btn-none glass text-white">
+				Create
+			</button>
+		</div>
 	</form>
 </template>
 

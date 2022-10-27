@@ -31,14 +31,14 @@
 					></button>
 				</slot>
 				<slot class="modal-body" name="body"></slot>
-				<div class="modal-footer">
+				<!-- <div class="modal-footer">
 					<button type="button" class="btn btn-danger" data-bs-dismiss="modal">
 						Close
 					</button>
 					<button type="button" class="btn btn-none glass text-white">
 						Create
 					</button>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
