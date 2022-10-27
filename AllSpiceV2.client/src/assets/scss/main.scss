@@ -4,8 +4,22 @@
 @import "./_utilities.scss";
 @import "./loaders.scss";
 
-body{
+body {
   overscroll-behavior: none;
+}
+
+.glass {
+  background: rgb(0 0 0 / 18%);
+  backdrop-filter: blur(4px);
+  border-radius: 10px;
+  padding: 7px;
+}
+
+.glass2 {
+  background: rgb(0 0 0 / 18%);
+  backdrop-filter: blur(4px);
+  border-radius: 5px;
+  padding: 7px;
 }
 
 #app {
@@ -30,6 +44,7 @@ select {
     &:valid {
       border: 1px solid $success;
     }
+
     &:invalid {
       border: 1px solid $danger;
     }

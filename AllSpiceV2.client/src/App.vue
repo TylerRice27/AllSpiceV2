@@ -1,11 +1,11 @@
 <template>
-  <header>
-    <Navbar />
-  </header>
-  <main>
-    <router-view />
-  </main>
-  <footer></footer>
+	<header>
+		<Navbar />
+	</header>
+	<main>
+		<router-view />
+	</main>
+	<footer></footer>
 </template>
 
 <script>
@@ -14,12 +14,12 @@ import { AppState } from './AppState'
 import Navbar from './components/Navbar.vue'
 
 export default {
-  setup() {
-    return {
-      appState: computed(() => AppState)
-    }
-  },
-  components: { Navbar }
+	setup() {
+		return {
+			appState: computed(() => AppState)
+		}
+	},
+	components: { Navbar }
 }
 </script>
 <style lang="scss">
