@@ -4,6 +4,7 @@
       <div
         class="
           card
+          glass3
           elevation-5
           d-flex
           flex-row

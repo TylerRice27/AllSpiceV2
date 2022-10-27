@@ -8,6 +8,12 @@ body {
   overscroll-behavior: none;
 }
 
+.add-button {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+}
+
 .glass {
   background: rgb(0 0 0 / 18%);
   backdrop-filter: blur(4px);
@@ -20,6 +26,16 @@ body {
   backdrop-filter: blur(4px);
   border-radius: 5px;
   padding: 7px;
+}
+
+.glass3 {
+  background: rgba(247, 81, 4, 0.699);
+  backdrop-filter: blur(4px);
+  border-radius: 50%;
+  height: 4rem;
+  width: 4rem;
+  border: none;
+  // padding: 7px;
 }
 
 #app {
