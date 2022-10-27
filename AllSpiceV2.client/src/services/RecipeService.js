@@ -18,6 +18,14 @@ class RecipeService {
     AppState.recipes = res.data
   }
 
+  async getMyRecipes() {
+    const res = await api.get("api/recipes")
+    let recipes = AppState.recipes = res.data
+    let filteredRec = recipes.filter(r => r.creatorId == AppState.account.id)
+    logger.log("filterd", filteredRec)
+    AppState.recipes = filteredRec
+
+  }
 
 }
 
