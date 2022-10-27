@@ -15,9 +15,9 @@
 
     <div class="col-md-3 ms-4 mt-5 mb-5">
       <div class="card h-100 card-color">
-        <h3 class="text-center glass4 text-white">Recipe Instructions</h3>
+        <h3 class="text-center glass4 text-white">Recipe Ingredients</h3>
 
-        <p class="ps-3">{{ activeRecipe.ingredients }}</p>
+        <p class="ps-3">{{ ingredients }}</p>
       </div>
     </div>
   </div>
@@ -29,25 +29,13 @@ import { computed, watchEffect, } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
-import { ingredientService } from '../services/IngredientService'
 export default {
   setup() {
-    async function getIngredients() {
-      try {
-        await ingredientService.getIngredients(AppState.activeRecipe.id)
 
-      } catch (error) {
-        logger.error(error)
-        Pop.toast(error.message, 'error')
-      }
-    }
-
-    watchEffect(async () => {
-      getIngredients()
-    })
 
     return {
       activeRecipe: computed(() => AppState.activeRecipe),
+      ingredients: computed(() => AppState.ingredients)
     }
   }
 }
