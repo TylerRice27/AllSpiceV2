@@ -12,9 +12,9 @@
 					ty
 				"
 			>
-				<div class="">Home</div>
-				<div class="">My Recipes</div>
-				<div class="">Favorites</div>
+				<div class="selectable" @click="getRecipes()">Home</div>
+				<div class="selectable">My Recipes</div>
+				<div class="selectable" @click="getFavorites()">Favorites</div>
 			</div>
 		</div>
 
@@ -43,8 +43,24 @@ export default {
 		)
 
 		return {
-			recipes: computed(() => AppState.recipes)
-
+			recipes: computed(() => AppState.recipes),
+			// isFavorited: computed(()=> AppState.recipes)
+			async getRecipes() {
+				try {
+					await recipeService.getRecipes()
+				} catch (error) {
+					logger.error(error)
+					Pop.toast(error.message, 'error')
+				}
+			},
+			async getFavorites() {
+				try {
+					await recipeService.getFavorites()
+				} catch (error) {
+					logger.error(error)
+					Pop.toast(error.message, 'error')
+				}
+			}
 		}
 	}
 }
