@@ -13,9 +13,13 @@
           ty
         "
       >
-        <div class="selectable" @click="getRecipes()">Home</div>
-        <div class="selectable" @click="getMyRecipes()">My Recipes</div>
-        <div class="selectable" @click="getFavorites()">Favorites</div>
+        <div class="selectable text-white" @click="getRecipes()">Home</div>
+        <div class="selectable text-white" @click="getMyRecipes()">
+          My Recipes
+        </div>
+        <div class="selectable text-white" @click="getFavorites()">
+          Favorites
+        </div>
       </div>
     </div>
 
