@@ -55,8 +55,9 @@ namespace AllSpiceV2.Repositories
            r.*,
            a.*
            FROM tjrecipes r
-           JOIN accounts a ON a.id = r.creatorId;
-           ";
+           JOIN accounts a ON a.id = r.creatorId
+           ORDER BY r.createdAt DESC;";
+
             return _db.Query<Recipe, Profile, Recipe>(sql, (recipe, profile) =>
             {
                 recipe.Creator = profile;
