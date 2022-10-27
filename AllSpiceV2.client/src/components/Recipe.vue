@@ -4,7 +4,7 @@
 			<div class="d-flex flex-row justify-content-between">
 				<h6
 					class="
-						col-4
+						col-md-4
 						glass2
 						ms-1
 						mt-1
