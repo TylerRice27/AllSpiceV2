@@ -25,10 +25,27 @@
 
 
 <script>
-import { computed } from '@vue/runtime-core'
+import { computed, watchEffect, } from '@vue/runtime-core'
 import { AppState } from '../AppState'
+import Pop from '../utils/Pop'
+import { logger } from '../utils/Logger'
+import { ingredientService } from '../services/IngredientService'
 export default {
   setup() {
+    async function getIngredients() {
+      try {
+        await ingredientService.getIngredients(AppState.activeRecipe.id)
+
+      } catch (error) {
+        logger.error(error)
+        Pop.toast(error.message, 'error')
+      }
+    }
+
+    watchEffect(async () => {
+      getIngredients()
+    })
+
     return {
       activeRecipe: computed(() => AppState.activeRecipe),
     }
