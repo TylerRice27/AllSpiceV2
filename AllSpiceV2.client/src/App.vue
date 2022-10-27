@@ -11,6 +11,22 @@
 				<CreateForm />
 			</template>
 		</Modal>
+		<Modal class="modal-dialog modal-xl" id="details-modal">
+			<template #header>
+				<div class="d-flex flex-row glass4 justify-content-between">
+					<h3 class="text-center text-white">{{ activeRecipe.title }}</h3>
+					<button
+						type="button"
+						class="btn-close mt-2 me-1"
+						data-bs-dismiss="modal"
+						aria-label="Close"
+					></button>
+				</div>
+			</template>
+			<template #body>
+				<DetailsModal />
+			</template>
+		</Modal>
 		<router-view />
 		<div class="add-button">
 			<button
@@ -36,7 +52,8 @@ export default {
 	setup() {
 		return {
 			appState: computed(() => AppState),
-			account: computed(() => AppState.account)
+			account: computed(() => AppState.account),
+			activeRecipe: computed(() => AppState.activeRecipe)
 		}
 	},
 	components: { Navbar }

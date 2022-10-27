@@ -1,6 +1,11 @@
 <template>
 	<div class="col-md-4">
-		<div class="recipe-bg card m-4 elevation-5 d-flex justify-content-between">
+		<div
+			class="recipe-bg card m-4 elevation-5 d-flex justify-content-between"
+			@click="setActive()"
+			data-bs-toggle="modal"
+			data-bs-target="#details-modal"
+		>
 			<div class="d-flex flex-row justify-content-between">
 				<h6
 					class="
@@ -27,12 +32,20 @@
 
 <script>
 import { computed } from '@vue/runtime-core'
-import { AppState } from '../AppState'
+import { recipeService } from '../services/RecipeService'
 export default {
 	props: { recipe: { type: Object, required: true } },
 	setup(props) {
 		return {
 			img: computed(() => `url(${props.recipe?.img}`),
+			async setActive() {
+				try {
+					await recipeService.setActive(props.recipe.id)
+				} catch (error) {
+					logger.error(error)
+					Pop.toast(error.message, 'error')
+				}
+			}
 		}
 	}
 }
