@@ -24,7 +24,12 @@ class RecipeService {
     let filteredRec = recipes.filter(r => r.creatorId == AppState.account.id)
     logger.log("filterd", filteredRec)
     AppState.recipes = filteredRec
+  }
 
+  async createRecipe(recipeData) {
+    const res = await api.post("api/recipes", recipeData)
+    logger.log(res.data)
+    AppState.recipes.unshift(res.data)
   }
 
 }
