@@ -15,7 +15,7 @@
 				>
 					{{ recipe.category }}
 				</h6>
-				<h6 class="mdi mdi-heart glass2 mt-1 me-1 text-danger"></h6>
+				<h6 class="mdi mdi-heart glass2 mt-1 me-1 text-white"></h6>
 			</div>
 			<div class="d-flex justify-content-center">
 				<h5 class="glass text-white">{{ recipe.title }}</h5>

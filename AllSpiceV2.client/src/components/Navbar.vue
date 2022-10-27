@@ -16,9 +16,9 @@
 		</button>
 		<router-link class="navbar-brand" :to="{ name: 'Home' }">
 			<h3 class="text-center mt-3 mb-3">All-Spice</h3>
+			<p class="text-center fs-5 text-white">Cherish Your Family</p>
+			<p class="text-center fs-5 text-white">And Their Cooking</p>
 		</router-link>
-		<p class="text-center fs-5 text-white">Cherish Your Family</p>
-		<p class="text-center fs-5 text-white">And Their Cooking</p>
 	</nav>
 </template>
 
