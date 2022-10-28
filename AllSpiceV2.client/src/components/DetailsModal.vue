@@ -18,14 +18,29 @@
         <h3 class="text-center d-flex glass4 text-white">Recipe Ingredients</h3>
 
         <Ingredient v-for="i in ingredients" :key="i.id" :ingredient="i" />
-        <form action="">
+
+        <div class="input-group mb-3">
           <input
-            placeholder="Add an Ingredient"
-            class="align-items-end form-control"
             type="text"
+            class="form-control ms-2"
+            placeholder="Add an Ingredient!"
           />
-          <i class="mdi mdi-plus"></i>
-        </form>
+          <button class="btn btn-warning me-2 my-orange" type="button">
+            <i title="Add an Ingredient" class="mdi mdi-plus fs-5"></i>
+          </button>
+        </div>
+
+        <!-- <div class="input-group mb-1 mt-4">
+          <input
+            placeholder="Add an Ingredient!"
+            type="text"
+            class="rounded p-1 borz form-control"
+            aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-default"
+          />
+          <span class="input-group-text mdi mdi-plus">@</span>
+          <i title="Add an Ingredient" class="mdi mdi-plus fs-4"></i>
+        </div> -->
       </div>
     </div>
   </div>
