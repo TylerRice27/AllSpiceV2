@@ -13,6 +13,12 @@ class IngredientService {
         AppState.ingredients = res.data
     }
 
+    async createIngredient(recipeData) {
+        const res = await api.create('api/ingredients')
+        logger.log("creating an ingredient", res.data)
+        AppState.ingredients.push(res.data)
+    }
+
 
 }
 
