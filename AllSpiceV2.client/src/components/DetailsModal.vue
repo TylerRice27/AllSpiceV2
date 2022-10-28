@@ -20,13 +20,14 @@
         <Ingredient v-for="i in ingredients" :key="i.id" :ingredient="i" />
 
         <div class="input-group mb-3">
-          <input
-            type="text"
-            class="form-control ms-2"
-            placeholder="Add an Ingredient!"
-          />
-          <button class="btn btn-warning me-2 my-orange" type="button">
-            <i title="Add an Ingredient" class="mdi mdi-plus fs-5"></i>
+          <input type="text" class="form-control ms-2" placeholder="Quantity" />
+          <input type="text" class="form-control" placeholder="Ingredient" />
+          <button
+            @click="createIngredient"
+            class="btn btn-warning me-2 my-orange"
+            type="button"
+          >
+            <i title="Add an Ingredient" class="mdi mdi-plus"></i>
           </button>
         </div>
 
@@ -52,13 +53,25 @@ import { computed, watchEffect, } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
+import { ingredientService } from '../services/IngredientService'
 export default {
   setup() {
 
 
     return {
       activeRecipe: computed(() => AppState.activeRecipe),
-      ingredients: computed(() => AppState.ingredients)
+      ingredients: computed(() => AppState.ingredients),
+
+
+      async createIngredient() {
+        try {
+          await ingredientService.createIngredient()
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+
+      }
     }
   }
 }

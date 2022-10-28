@@ -34,6 +34,8 @@
 import { computed } from '@vue/runtime-core'
 import { recipeService } from '../services/RecipeService'
 import { ingredientService } from '../services/IngredientService'
+import Pop from '../utils/Pop'
+import { logger } from '../utils/Logger'
 
 export default {
   props: { recipe: { type: Object, required: true } },
