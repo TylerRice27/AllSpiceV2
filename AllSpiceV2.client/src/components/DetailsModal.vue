@@ -15,9 +15,17 @@
 
     <div class="col-md-3 ms-4 mt-5 mb-5">
       <div class="card h-100 card-color">
-        <h3 class="text-center glass4 text-white">Recipe Ingredients</h3>
+        <h3 class="text-center d-flex glass4 text-white">Recipe Ingredients</h3>
 
         <Ingredient v-for="i in ingredients" :key="i.id" :ingredient="i" />
+        <form action="">
+          <input
+            placeholder="Add an Ingredient"
+            class="align-items-end form-control"
+            type="text"
+          />
+          <i class="mdi mdi-plus"></i>
+        </form>
       </div>
     </div>
   </div>
