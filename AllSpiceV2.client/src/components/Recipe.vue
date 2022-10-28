@@ -42,6 +42,7 @@ export default {
       img: computed(() => `url(${props.recipe?.img}`),
       async setActive() {
         try {
+
           await recipeService.setActive(props.recipe.id)
           await ingredientService.getIngredients(props.recipe.id)
         } catch (error) {

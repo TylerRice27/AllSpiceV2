@@ -17,7 +17,7 @@
       <div class="card h-100 card-color">
         <h3 class="text-center glass4 text-white">Recipe Ingredients</h3>
 
-        <p class="ps-3">{{ ingredients }}</p>
+        <Ingredient v-for="i in ingredients" :key="i.id" :ingredient="i" />
       </div>
     </div>
   </div>
