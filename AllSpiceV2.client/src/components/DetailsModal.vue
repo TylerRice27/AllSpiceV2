@@ -20,8 +20,18 @@
         <Ingredient v-for="i in ingredients" :key="i.id" :ingredient="i" />
 
         <div class="input-group mb-3">
-          <input type="text" class="form-control ms-2" placeholder="Quantity" />
-          <input type="text" class="form-control" placeholder="Ingredient" />
+          <input
+            type="text"
+            class="form-control ms-2"
+            placeholder="Quantity"
+            v-model="editable.quantity"
+          />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Ingredient"
+            v-model="editable.name"
+          />
           <button
             @click="createIngredient"
             class="btn btn-warning me-2 my-orange"
@@ -55,6 +65,7 @@ import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
 import { ingredientService } from '../services/IngredientService'
 export default {
+  editable,
   setup() {
 
 
@@ -65,7 +76,7 @@ export default {
 
       async createIngredient() {
         try {
-          await ingredientService.createIngredient()
+          await ingredientService.createIngredient(editable.value)
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
