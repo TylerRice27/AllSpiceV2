@@ -59,17 +59,18 @@
 
 
 <script>
-import { computed, watchEffect, } from '@vue/runtime-core'
+import { computed, ref, watchEffect, } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
 import { ingredientService } from '../services/IngredientService'
 export default {
-  editable,
   setup() {
+    const editable = ref({})
 
 
     return {
+      editable,
       activeRecipe: computed(() => AppState.activeRecipe),
       ingredients: computed(() => AppState.ingredients),
 
