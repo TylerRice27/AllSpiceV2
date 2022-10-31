@@ -6,32 +6,32 @@ using Dapper;
 
 namespace AllSpiceV2.Repositories
 {
-    public class FavoritesRepository
+  public class FavoritesRepository
+  {
+
+    private readonly IDbConnection _db;
+
+    public FavoritesRepository(IDbConnection db)
     {
+      _db = db;
+    }
 
-        private readonly IDbConnection _db;
-
-        public FavoritesRepository(IDbConnection db)
-        {
-            _db = db;
-        }
-
-        internal Favorite Create(Favorite newFavorite)
-        {
-            string sql = @"
+    internal Favorite Create(Favorite newFavorite)
+    {
+      string sql = @"
             INSERT INTO tjfavorites
             (accountId, recipeId)
             VALUES
             (@AccountId, @RecipeId);
             SELECT LAST_INSERT_ID();";
-            int id = _db.ExecuteScalar<int>(sql, newFavorite);
-            newFavorite.Id = id;
-            return newFavorite;
-        }
+      int id = _db.ExecuteScalar<int>(sql, newFavorite);
+      newFavorite.Id = id;
+      return newFavorite;
+    }
 
-        internal List<FavoriteViewModel> GetAccountFavorites(string userId)
-        {
-            string sql = @"
+    internal List<FavoritedRecipe> GetAccountFavorites(string userId)
+    {
+      string sql = @"
             SELECT
             a.*,
             r.*,
@@ -41,23 +41,23 @@ namespace AllSpiceV2.Repositories
             JOIN accounts a on a.id = r.creatorId
             WHERE f.accountId = @userId;
             ";
-            return _db.Query<Account, FavoriteViewModel, FavoriteViewModel>(sql, (profile, recipe) =>
-            {
-                recipe.Creator = profile;
-                return recipe;
-            }, new { userId }).ToList();
-        }
-
-        internal void Delete(int id)
-        {
-            string sql = "DELETE FROM tjfavorites WHERE id = @id LIMIT 1";
-            _db.Execute(sql, new { id });
-        }
-
-        internal Favorite GetById(int id)
-        {
-            string sql = "SELECT * FROM tjfavorites WHERE tjfavorites.id = @id";
-            return _db.QueryFirstOrDefault<Favorite>(sql, new { id });
-        }
+      return _db.Query<Account, FavoritedRecipe, FavoritedRecipe>(sql, (profile, recipe) =>
+      {
+        recipe.Creator = profile;
+        return recipe;
+      }, new { userId }).ToList();
     }
+
+    internal void Delete(int id)
+    {
+      string sql = "DELETE FROM tjfavorites WHERE id = @id LIMIT 1";
+      _db.Execute(sql, new { id });
+    }
+
+    internal Favorite GetById(int id)
+    {
+      string sql = "SELECT * FROM tjfavorites WHERE tjfavorites.id = @id";
+      return _db.QueryFirstOrDefault<Favorite>(sql, new { id });
+    }
+  }
 }
