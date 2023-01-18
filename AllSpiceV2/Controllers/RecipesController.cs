@@ -123,8 +123,6 @@ namespace AllSpiceV2.Controllers
 
         return BadRequest(e.Message);
       }
-
-
     }
 
     [HttpDelete("{id}")]

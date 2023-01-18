@@ -7,11 +7,7 @@
     <div class="p-3">
       <label>Image</label>
       <input type="" class="form-control" v-model="recipeData.img" />
-      <img
-        class="img-fluid form-img rounded mt-4"
-        :src="recipeData.img"
-        alt=""
-      />
+      <img class="img-fluid form-img rounded mt-4" :src="recipeData.img" alt="" />
     </div>
     <div class="mb-1 p-3">
       <label>Instructions</label>
@@ -22,12 +18,7 @@
       <input type="" class="form-control" v-model="recipeData.category" />
     </div>
     <div class="modal-footer">
-      <button
-        type="button"
-        class="btn btn-danger"
-        data-bs-dismiss="modal"
-        @click="resetModal()"
-      >
+      <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="resetModal()">
         Close
       </button>
       <button type="submit" class="btn btn-none glass text-white">
@@ -42,6 +33,8 @@
 import { ref } from '@vue/reactivity'
 import { recipeService } from '../services/RecipeService'
 import { Modal } from 'bootstrap'
+import { logger } from '../utils/Logger.js'
+import Pop from '../utils/Pop.js'
 export default {
   setup() {
     const recipeData = ref({})

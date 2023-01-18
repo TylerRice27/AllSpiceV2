@@ -1,14 +1,8 @@
 <template>
   <div class="col-md-4">
-    <div
-      class="recipe-bg card m-4 elevation-5 d-flex justify-content-between"
-      @click="setActive()"
-      data-bs-toggle="modal"
-      data-bs-target="#details-modal"
-    >
-      <div class="d-flex flex-row justify-content-between">
-        <h6
-          class="
+    <div class="recipe-bg card m-4 elevation-5 d-flex justify-content-between selectable" @click="setActive()" data-bs-target="#details-modal">
+      <div class="d-flex flex-row justify-content-between selectable">
+        <h6 class="
             col-md-4
             glass2
             ms-1
@@ -16,14 +10,20 @@
             d-flex
             justify-content-center
             text-white
-          "
-        >
+          ">
           {{ recipe.category }}
         </h6>
-        <h6 class="mdi mdi-heart glass2 mt-1 me-1 text-white"></h6>
+        <div>
+          <h6 class="mdi mdi-heart glass2 mt-1 me-1 text-white selectable"></h6>
+        </div>
       </div>
-      <div class="d-flex justify-content-center">
-        <h5 class="glass text-white">{{ recipe.title }}</h5>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="col-8 col-md-9">
+          <h5 class="glass text-white selectable">{{ recipe.title }}</h5>
+        </div>
+        <div v-if="recipe.creatorId == account.id">
+          <i class="mdi mdi-delete-forever-outline fs-3 text-danger" @click.stop="deleteRecipe"></i>
+        </div>
       </div>
     </div>
   </div>
@@ -36,22 +36,35 @@ import { recipeService } from '../services/RecipeService'
 import { ingredientService } from '../services/IngredientService'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
+import { Modal } from 'bootstrap'
+import { AppState } from '../AppState.js'
+
 
 export default {
   props: { recipe: { type: Object, required: true } },
   setup(props) {
     return {
+      account: computed(() => AppState.account),
       img: computed(() => `url(${props.recipe?.img}`),
       async setActive() {
         try {
 
           await recipeService.setActive(props.recipe.id)
+          Modal.getOrCreateInstance(document.getElementById('details-modal')).show()
           await ingredientService.getIngredients(props.recipe.id)
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
         }
-      }
+      },
+      async deleteRecipe() {
+        try {
+          await recipeService.deleteRecipe(props.recipe.id)
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      },
     }
   }
 }
