@@ -1,8 +1,21 @@
 <template>
   <div class="col-md-4">
-    <div class="recipe-bg card m-4 elevation-5 d-flex justify-content-between selectable" @click="setActive()" data-bs-target="#details-modal">
+    <div
+      class="
+        recipe-bg
+        card
+        m-4
+        elevation-5
+        d-flex
+        justify-content-between
+        selectable
+      "
+      @click="setActive()"
+      data-bs-target="#details-modal"
+    >
       <div class="d-flex flex-row justify-content-between selectable">
-        <h6 class="
+        <h6
+          class="
             col-md-4
             glass2
             ms-1
@@ -10,7 +23,8 @@
             d-flex
             justify-content-center
             text-white
-          ">
+          "
+        >
           {{ recipe.category }}
         </h6>
         <div>
@@ -18,11 +32,14 @@
         </div>
       </div>
       <div class="d-flex justify-content-between align-items-center">
-        <div class="col-8 col-md-9">
-          <h5 class="glass text-white selectable">{{ recipe.title }}</h5>
+        <div class="col-8 col-md-7">
+          <h5 class="glass text-white text-center">{{ recipe.title }}</h5>
         </div>
         <div v-if="recipe.creatorId == account.id">
-          <i class="mdi mdi-delete-forever-outline fs-3 text-danger" @click.stop="deleteRecipe"></i>
+          <i
+            class="mdi mdi-delete-forever-outline fs-3 text-danger"
+            @click.stop="deleteRecipe"
+          ></i>
         </div>
       </div>
     </div>
@@ -59,7 +76,9 @@ export default {
       },
       async deleteRecipe() {
         try {
-          await recipeService.deleteRecipe(props.recipe.id)
+          if (await Pop.confirm("Destroy Me Maybe?", "Are you sure you want to destroy your family recipe?", "Destroy", "warning")) {
+            await recipeService.deleteRecipe(props.recipe.id)
+          }
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
