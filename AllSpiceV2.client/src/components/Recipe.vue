@@ -27,7 +27,7 @@
         >
           {{ recipe.category }}
         </h6>
-        <div>
+        <div @click.stop="createFavorite">
           <h6 class="mdi mdi-heart glass2 mt-1 me-1 text-white selectable"></h6>
         </div>
       </div>
@@ -55,6 +55,7 @@ import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
 import { Modal } from 'bootstrap'
 import { AppState } from '../AppState.js'
+import { favoriteService } from '../services/FavoriteService'
 
 
 export default {
@@ -84,6 +85,17 @@ export default {
           Pop.toast(error.message, 'error')
         }
       },
+      async createFavorite() {
+        try {
+          let fav = {
+            recipeId: props.recipe.id
+          }
+          await favoriteService.createFavorite(fav)
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      }
     }
   }
 }

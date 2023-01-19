@@ -12,11 +12,6 @@ class RecipeService {
     AppState.recipes = res.data
   }
 
-  async getFavorites() {
-    const res = await api.get("account/favorites")
-    logger.log('get favorites', res.data)
-    AppState.recipes = res.data
-  }
 
   async getMyRecipes() {
     const res = await api.get("api/recipes")
