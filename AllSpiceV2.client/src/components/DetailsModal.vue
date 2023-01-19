@@ -17,11 +17,27 @@
       <div class="card h-100 card-color">
         <h3 class="text-center d-flex glass4 text-white">Recipe Ingredients</h3>
 
-
-        <div class="input-group mb-3">
-          <input type="text" class="form-control ms-2" placeholder="Quantity" v-model="editable.quantity" />
-          <input type="text" class="form-control" placeholder="Name" v-model="editable.name" />
-          <button @click="createIngredient" class="btn btn-warning me-2 my-orange" type="button">
+        <div
+          v-if="activeRecipe.creatorId == account.id"
+          class="input-group mb-3"
+        >
+          <input
+            type="text"
+            class="form-control ms-2"
+            placeholder="Quantity"
+            v-model="editable.quantity"
+          />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Name"
+            v-model="editable.name"
+          />
+          <button
+            @click="createIngredient"
+            class="btn btn-warning me-2 my-orange"
+            type="button"
+          >
             <i title="Add an Ingredient" class="mdi mdi-plus"></i>
           </button>
         </div>
@@ -47,6 +63,7 @@ export default {
       editable,
       activeRecipe: computed(() => AppState.activeRecipe),
       ingredients: computed(() => AppState.ingredients),
+      account: computed(() => AppState.account),
 
 
       async createIngredient() {
