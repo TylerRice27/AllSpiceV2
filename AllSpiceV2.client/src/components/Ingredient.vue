@@ -4,7 +4,16 @@
       {{ ingredient.quantity }}
       {{ ingredient.name }}
     </p>
-    <i class="mdi mdi-delete-forever-outline fs-5 text-danger" @click="deleteIngredient"></i>
+    <div>
+      <i
+        class="mdi mdi-pencil-outline fs-5 p-1 selectable"
+        @click="editIngredient"
+      ></i>
+      <i
+        class="mdi mdi-delete-forever-outline fs-5 text-danger selectable"
+        @click="deleteIngredient"
+      ></i>
+    </div>
   </div>
 </template>
 
@@ -24,7 +33,9 @@ export default {
       ingredients: computed(() => AppState.ingredients),
       async deleteIngredient() {
         try {
-          await ingredientService.deleteIngredient(props.ingredient.id)
+          if (await Pop.confirm("Destroy Me Maybe?", "Are you sure you want to remove this ingredient?", "Remove", "warning")) {
+            await ingredientService.deleteIngredient(props.ingredient.id)
+          }
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
