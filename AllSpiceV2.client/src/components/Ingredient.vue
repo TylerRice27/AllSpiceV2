@@ -35,7 +35,7 @@ export default {
       account: computed(() => AppState.account),
       async deleteIngredient() {
         try {
-          if (await Pop.confirm("Destroy Me Maybe?", "Are you sure you want to remove this ingredient?", "Remove", "warning")) {
+          if (await Pop.confirm("Remove?", "Are you sure you want to remove this ingredient?", "Remove", "warning")) {
             await ingredientService.deleteIngredient(props.ingredient.id)
           }
         } catch (error) {

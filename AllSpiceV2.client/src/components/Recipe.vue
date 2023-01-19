@@ -76,7 +76,7 @@ export default {
       },
       async deleteRecipe() {
         try {
-          if (await Pop.confirm("Destroy Me Maybe?", "Are you sure you want to destroy your family recipe?", "Destroy", "warning")) {
+          if (await Pop.confirm("Destroy?", "Are you sure you want to destroy your family recipe?", "Destroy", "warning")) {
             await recipeService.deleteRecipe(props.recipe.id)
           }
         } catch (error) {
