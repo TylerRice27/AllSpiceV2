@@ -42,24 +42,24 @@ namespace AllSpiceV2.Controllers
 
         }
 
-        [HttpPut("{id}")]
-        [Authorize]
+        // [HttpPut("{id}")]
+        // [Authorize]
 
-        public async Task<ActionResult<Ingredient>> Edit(int id, [FromBody] Ingredient update)
-        {
-            try
-            {
-                Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
-                update.Id = id;
-                Ingredient ingredient = _is.Edit(update, userInfo.Id);
-                return Ok(ingredient);
-            }
-            catch (Exception e)
-            {
+        // public async Task<ActionResult<Ingredient>> Edit(int id, [FromBody] Ingredient update)
+        // {
+        //     try
+        //     {
+        //         Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+        //         update.Id = id;
+        //         Ingredient ingredient = _is.Edit(update, userInfo.Id);
+        //         return Ok(ingredient);
+        //     }
+        //     catch (Exception e)
+        //     {
 
-                return BadRequest(e.Message);
-            }
-        }
+        //         return BadRequest(e.Message);
+        //     }
+        // }
 
 
         [HttpDelete("{id}")]

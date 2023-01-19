@@ -49,17 +49,17 @@ namespace AllSpiceV2.Services
             return original;
         }
 
-        internal Ingredient Edit(Ingredient update, string userId)
-        {
-            Ingredient original = GetById(update.Id);
-            if (original.Creator.Id != userId)
-            {
-                throw new Exception("You are not the owner of this recipe");
-            }
-            original.Name = update.Name ?? original.Name;
-            original.Quantity = update.Quantity ?? original.Quantity;
+        // internal Ingredient Edit(Ingredient update, string userId)
+        // {
+        //     Ingredient original = GetById(update.Id);
+        //     if (original.Creator.Id != userId)
+        //     {
+        //         throw new Exception("You are not the owner of this recipe");
+        //     }
+        //     original.Name = update.Name ?? original.Name;
+        //     original.Quantity = update.Quantity ?? original.Quantity;
 
-            return _repo.Edit(original);
-        }
+        //     return _repo.Edit(original);
+        // }
     }
 }
