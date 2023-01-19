@@ -31,7 +31,6 @@ namespace AllSpiceV2.Controllers
             try
             {
                 Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
-
                 Ingredient ingredient = _is.Create(newIngredient);
                 return Ok(ingredient);
             }

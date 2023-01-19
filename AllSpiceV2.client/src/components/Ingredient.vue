@@ -4,7 +4,7 @@
       {{ ingredient.quantity }}
       {{ ingredient.name }}
     </p>
-    <div>
+    <div v-if="activeRecipe.creatorId == account.id">
       <i
         class="mdi mdi-pencil-outline fs-5 p-1 selectable"
         @click="editIngredient"
@@ -31,6 +31,8 @@ export default {
   setup(props) {
     return {
       ingredients: computed(() => AppState.ingredients),
+      activeRecipe: computed(() => AppState.activeRecipe),
+      account: computed(() => AppState.account),
       async deleteIngredient() {
         try {
           if (await Pop.confirm("Destroy Me Maybe?", "Are you sure you want to remove this ingredient?", "Remove", "warning")) {
