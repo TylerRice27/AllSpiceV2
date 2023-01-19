@@ -87,10 +87,11 @@ export default {
       },
       async createFavorite() {
         try {
-          let fav = {
-            recipeId: props.recipe.id
-          }
-          await favoriteService.createFavorite(fav)
+          // NOTE let fav = and createFavorite({recipeId: props.recipe.id}) Do the same thing
+          // let fav = {
+          //   recipeId: props.recipe.id
+          // }
+          await favoriteService.createFavorite({ recipeId: props.recipe.id })
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
