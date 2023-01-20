@@ -6,51 +6,55 @@ using Dapper;
 
 namespace AllSpiceV2.Repositories
 {
-  public class IngredientsRepository
-  {
-    private readonly IDbConnection _db;
-
-    public IngredientsRepository(IDbConnection db)
+    public class IngredientsRepository
     {
-      _db = db;
-    }
+        private readonly IDbConnection _db;
 
-    internal Ingredient Create(Ingredient newIngredient)
-    {
-      string sql = @"
+        public IngredientsRepository(IDbConnection db)
+        {
+            _db = db;
+        }
+
+        internal Ingredient Create(Ingredient newIngredient)
+        {
+            string sql = @"
             INSERT INTO tjingredients
             (name, quantity, recipeId)
             VALUES
             (@Name, @Quantity, @RecipeId);
             SELECT LAST_INSERT_ID();";
-      int id = _db.ExecuteScalar<int>(sql, newIngredient);
-      newIngredient.Id = id;
-      return newIngredient;
-    }
+            int id = _db.ExecuteScalar<int>(sql, newIngredient);
+            newIngredient.Id = id;
+            return newIngredient;
+        }
 
-    internal Ingredient GetById(int id)
-    {
-      string sql = @"
+        internal Ingredient GetById(int id)
+        {
+            string sql = @"
             SELECT * FROM tjingredients
             WHERE id = @id
             ";
-      return _db.QueryFirstOrDefault<Ingredient>(sql, new { id });
-    }
+            return _db.QueryFirstOrDefault<Ingredient>(sql, new { id });
+        }
 
-    internal void Delete(Ingredient original)
-    {
-      string sql = "DELETE FROM tjingredients WHERE id = @id LIMIT 1;";
-      _db.Execute(sql, original);
+        internal void Delete(Ingredient original)
+        {
+            string sql = "DELETE FROM tjingredients WHERE id = @id LIMIT 1;";
+            _db.Execute(sql, original);
 
-    }
+        }
 
-    internal List<Ingredient> GetIngredientsByRecipe(int recipeId)
-    {
-      string sql = @"
+        internal List<Ingredient> GetIngredientsByRecipe(int recipeId)
+        {
+            string sql = @"
             SELECT * 
             FROM tjingredients 
             WHERE recipeId = @recipeId";
-      return _db.Query<Ingredient>(sql, new { recipeId }).ToList();
+            return _db.Query<Ingredient>(sql, new { recipeId }).ToList();
+        }
     }
-  }
+
+    // NOTE need to create an edit Ingredient function in my 
+    // Backend for the pencil icon on the front end
+
 }
