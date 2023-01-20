@@ -52,9 +52,23 @@ namespace AllSpiceV2.Repositories
             WHERE recipeId = @recipeId";
             return _db.Query<Ingredient>(sql, new { recipeId }).ToList();
         }
-    }
 
-    // NOTE need to create an edit Ingredient function in my 
-    // Backend for the pencil icon on the front end
+        internal Ingredient Edit(Ingredient original)
+        {
+            string sql = @"
+            UPDATE tjingredients
+            SET
+            name = @Name,
+            quantity = @Quantity,
+            updatedAt = @UpdatedAt
+            WHERE id = @Id;
+            "; _db.Execute(sql, original);
+            return original;
+        }
+
+        // NOTE need to create an edit Ingredient function in my 
+        // Backend for the pencil icon on the front end
+
+    }
 
 }

@@ -43,6 +43,16 @@ export default {
           Pop.toast(error.message, 'error')
         }
       },
+
+      async editIngredient() {
+        try {
+          await ingredientService.editIngredient(props.ingredient.id,)
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      }
+
     }
   }
 }
