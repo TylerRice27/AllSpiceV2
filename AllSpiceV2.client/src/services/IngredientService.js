@@ -25,6 +25,10 @@ class IngredientService {
     AppState.ingredients = AppState.ingredients.filter(i => i.id != id)
   }
 
+  async editIngredient(id) {
+    const res = await api.put(`api/ingredients/${id}`)
+  }
+
 
 }
 
