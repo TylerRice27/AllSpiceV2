@@ -52,7 +52,9 @@ namespace AllSpiceV2.Services
         internal Ingredient Edit(Ingredient update, string userId)
         {
             Ingredient original = GetById(update.Id);
-            if (original.Creator.Id != userId)
+            Recipe recipe = _rs.GetById(update.RecipeId);
+
+            if (recipe.CreatorId != userId)
             {
                 throw new Exception("You are not the owner of this recipe");
             }

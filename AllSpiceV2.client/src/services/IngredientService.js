@@ -28,7 +28,8 @@ class IngredientService {
   async editIngredient(ingredient) {
     const res = await api.put(`api/ingredients/${ingredient.id}`, ingredient)
     logger.log("[Edit Ingredient}", res.data)
-    AppState.ingredients = res.data
+    let updatedIngredient = AppState.ingredients.find(i => i.id == ingredient.id)
+    updatedIngredient = res.data
   }
 
 
