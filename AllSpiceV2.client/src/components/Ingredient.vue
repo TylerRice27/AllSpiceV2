@@ -51,7 +51,8 @@ export default {
 
     return {
       editMode,
-      // editable,
+      editable,
+      // ingredient,
       ingredients: computed(() => AppState.ingredients),
       activeRecipe: computed(() => AppState.activeRecipe),
       account: computed(() => AppState.account),
@@ -68,13 +69,8 @@ export default {
 
       async editIngredient() {
         try {
-          let ingredient = {
-            id: props.ingredient.id,
-            recipeId: AppState.activeRecipe.id,
-            quantity: ingredient.value.quantity,
-            name: ingredient.value.name
-          }
-          await ingredientService.editIngredient(ingredient)
+
+          await ingredientService.editIngredient(props.ingredient)
           editMode.value = false
         } catch (error) {
           logger.error(error)
