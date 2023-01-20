@@ -46,13 +46,10 @@ export default {
   props: { ingredient: { type: Object, required: true } },
   setup(props) {
     const editMode = ref(false)
-    const editable = ref({})
 
 
     return {
       editMode,
-      editable,
-      // ingredient,
       ingredients: computed(() => AppState.ingredients),
       activeRecipe: computed(() => AppState.activeRecipe),
       account: computed(() => AppState.account),
