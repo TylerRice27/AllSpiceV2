@@ -1,23 +1,31 @@
 <template>
-  <div class="d-flex justify-content-around height">
-    <li>
-      <input
-        @blur="editIngredient"
-        v-if="editMode"
-        v-model="ingredient.quantity"
-      />
-      <input @blur="editIngredient" v-if="editMode" v-model="ingredient.name" />
-      <div v-else>
-        <label class="px-1" v-if="!editMode">{{ ingredient.quantity }}</label>
-        <label class="px-1" v-if="!editMode">{{ ingredient.name }}</label>
-      </div>
-    </li>
+  <div class="d-flex justify-content-around my-1 height">
+    <!-- <li> -->
+    <input
+      class="form-control mx-1"
+      @blur="editIngredient"
+      v-if="editMode"
+      v-model="ingredient.quantity"
+    />
+    <input
+      class="form-control mx-1"
+      @blur="editIngredient"
+      v-if="editMode"
+      v-model="ingredient.name"
+    />
+    <div v-else>
+      <label class="px-1" v-if="!editMode">{{ ingredient.quantity }}</label>
+      <label class="px-1" v-if="!editMode">{{ ingredient.name }}</label>
+    </div>
+    <!-- </li> -->
     <div v-if="activeRecipe.creatorId == account.id">
       <i
+        v-if="!editMode"
         class="mdi mdi-pencil-outline fs-5 p-1 selectable"
         @click="editMode = true"
       ></i>
       <i
+        v-if="!editMode"
         class="mdi mdi-delete-forever-outline fs-5 text-danger selectable"
         @click="deleteIngredient"
       ></i>
@@ -38,9 +46,12 @@ export default {
   props: { ingredient: { type: Object, required: true } },
   setup(props) {
     const editMode = ref(false)
+    const editable = ref({})
+
 
     return {
       editMode,
+      // editable,
       ingredients: computed(() => AppState.ingredients),
       activeRecipe: computed(() => AppState.activeRecipe),
       account: computed(() => AppState.account),
@@ -57,7 +68,13 @@ export default {
 
       async editIngredient() {
         try {
-          await ingredientService.editIngredient(props.ingredient.id,)
+          let ingredient = {
+            id: props.ingredient.id,
+            recipeId: AppState.activeRecipe.id,
+            quantity: ingredient.value.quantity,
+            name: ingredient.value.name
+          }
+          await ingredientService.editIngredient(ingredient)
           editMode.value = false
         } catch (error) {
           logger.error(error)

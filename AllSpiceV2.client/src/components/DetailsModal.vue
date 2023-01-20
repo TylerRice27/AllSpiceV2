@@ -41,9 +41,9 @@
             <i title="Add an Ingredient" class="mdi mdi-plus"></i>
           </button>
         </div>
-        <ul>
-          <Ingredient v-for="i in ingredients" :key="i.id" :ingredient="i" />
-        </ul>
+        <!-- <ul> -->
+        <Ingredient v-for="i in ingredients" :key="i.id" :ingredient="i" />
+        <!-- </ul> -->
       </div>
     </div>
   </div>
