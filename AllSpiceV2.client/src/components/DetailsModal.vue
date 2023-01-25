@@ -76,6 +76,7 @@ export default {
             name: editable.value.name
           }
           await ingredientService.createIngredient(ingredient)
+          editable.value = {}
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
@@ -90,8 +91,9 @@ export default {
 
 <style lang="scss" scoped>
 .custom {
-  max-height: 30rem;
+  min-height: 30rem;
   width: 100%;
+  object-fit: cover;
 }
 
 .card-color {
