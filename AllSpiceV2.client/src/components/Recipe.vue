@@ -1,7 +1,6 @@
 <template>
   <div class="col-md-4">
-    <div
-      class="
+    <div class="
         recipe-bg
         card
         m-4
@@ -9,13 +8,9 @@
         d-flex
         justify-content-between
         selectable
-      "
-      @click="setActive()"
-      data-bs-target="#details-modal"
-    >
+      " @click="setActive()" data-bs-target="#details-modal">
       <div class="d-flex flex-row justify-content-between selectable">
-        <h6
-          class="
+        <h6 class="
             col-md-4
             glass2
             ms-1
@@ -23,12 +18,12 @@
             d-flex
             justify-content-center
             text-white
-          "
-        >
+          ">
           {{ recipe.category }}
         </h6>
-        <div @click.stop="createFavorite">
-          <h6 class="mdi mdi-heart glass2 mt-1 me-1 text-white selectable"></h6>
+        <div>
+          <h6 v-if="!isFave" class="mdi mdi-heart-outline glass2 mt-1 me-1 text-white selectable" @click.stop="createFavorite"></h6>
+          <h6 v-else class="mdi mdi-heart glass2 mt-1 me-1 text-danger selectable" @click.stop="deleteFavorite"></h6>
         </div>
       </div>
       <div class="d-flex justify-content-between align-items-center">
@@ -36,10 +31,7 @@
           <h5 class="glass text-white text-center">{{ recipe.title }}</h5>
         </div>
         <div v-if="recipe.creatorId == account.id">
-          <i
-            class="mdi mdi-delete-forever-outline fs-3 text-danger"
-            @click.stop="deleteRecipe"
-          ></i>
+          <i class="mdi mdi-delete-forever-outline fs-3 text-danger" @click.stop="deleteRecipe"></i>
         </div>
       </div>
     </div>
@@ -63,10 +55,10 @@ export default {
   setup(props) {
     return {
       account: computed(() => AppState.account),
+      isFave: computed(() => AppState.myFavorites.find(r => r.id == props.recipe.id)),
       img: computed(() => `url(${props.recipe?.img}`),
       async setActive() {
         try {
-
           await recipeService.setActive(props.recipe.id)
           Modal.getOrCreateInstance(document.getElementById('details-modal')).show()
           await ingredientService.getIngredients(props.recipe.id)
@@ -87,11 +79,15 @@ export default {
       },
       async createFavorite() {
         try {
-          // NOTE let fav = and createFavorite({recipeId: props.recipe.id}) Do the same thing
-          // let fav = {
-          //   recipeId: props.recipe.id
-          // }
           await favoriteService.createFavorite({ recipeId: props.recipe.id })
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      },
+      async deleteFavorite() {
+        try {
+          await favoriteService.deleteFavorite(this.isFave.favoriteId)
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
