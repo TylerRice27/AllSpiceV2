@@ -23,7 +23,6 @@ namespace AllSpiceV2.Services
             Recipe recipe = _rs.GetById(newFavorite.RecipeId);
 
 
-            recipe.Id = newFavorite.RecipeId;
             // NOTE Come Back Here Later We are going to have to write an unquie column/index in sql
             // NOTE OR we can write a new route to our favorites table and do a getById  and if it the one we are creating matches
             // the new recipe id and the creator id then throw an error 
@@ -32,7 +31,8 @@ namespace AllSpiceV2.Services
             // {
             //     throw new Exception("You have already favorited this recipe");
             // }
-            return _repo.Create(newFavorite);
+            Favorite favorite = _repo.Create(newFavorite);
+            return favorite;
         }
 
         internal List<FavoritedRecipe> GetAccountFavorites(string userId)

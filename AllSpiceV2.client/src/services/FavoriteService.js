@@ -22,20 +22,17 @@ class FavoriteService {
   async createFavorite(fav) {
     const res = await api.post("api/favorites", fav)
     logger.log("[Create Favorite]", res.data)
-    AppState.favorites.unshift(res.data)
+    AppState.myFavorites.unshift(res.data)
+    //  TODO Need to rewrite my backend to get the favorite object back so I can update it manually with 
+    // Its favorite Id
   }
 
   async deleteFavorite(id) {
-    debugger
     const res = await api.delete(`api/favorites/${id}`)
     logger.log('[Delete Favorite]', res.data)
-    let foundRecipe = AppState.recipes.find(r => r.favoriteId == id)
-    // AppState.myFavorites.filter(m => m.id != id)
+    AppState.myFavorites = AppState.myFavorites.filter(m => m.favoriteId != id)
 
-    let index = AppState.favorites.findIndex(f => f.id == id)
-    if (index >= 0) {
-      AppState.recipes.splice(index, 1, foundRecipe)
-    }
+
   }
 }
 
