@@ -61,6 +61,10 @@ namespace AllSpiceV2.Repositories
             return _db.QueryFirstOrDefault<Favorite>(sql, new { id });
         }
 
+        // NOTE This FavoritedRecipe function by the id was just to grab my favorited recipe and send it back
+        // I need to go to my favorites sql and join the recipe and accounts where the f.id matched the id I passed
+        // Then I needed to map it to a favoritedRecipe then send it back
+
         internal FavoritedRecipe GetFavoritedRecipeById(int id)
         {
             string sql = @"
