@@ -23,8 +23,7 @@ class FavoriteService {
     const res = await api.post("api/favorites", fav)
     logger.log("[Create Favorite]", res.data)
     AppState.myFavorites.unshift(res.data)
-    //  TODO Need to rewrite my backend to get the favorite object back so I can update it manually with 
-    // Its favorite Id
+
   }
 
   async deleteFavorite(id) {
