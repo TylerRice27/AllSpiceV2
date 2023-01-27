@@ -18,9 +18,8 @@ namespace AllSpiceV2.Services
             _rs = rs;
         }
 
-        internal Favorite Create(Favorite newFavorite)
+        internal FavoritedRecipe Create(Favorite newFavorite)
         {
-            Recipe recipe = _rs.GetById(newFavorite.RecipeId);
 
 
             // NOTE Come Back Here Later We are going to have to write an unquie column/index in sql
@@ -31,8 +30,11 @@ namespace AllSpiceV2.Services
             // {
             //     throw new Exception("You have already favorited this recipe");
             // }
+
             Favorite favorite = _repo.Create(newFavorite);
-            return favorite;
+            FavoritedRecipe fr = _repo.GetFavoritedRecipeById(favorite.Id);
+
+            return fr;
         }
 
         internal List<FavoritedRecipe> GetAccountFavorites(string userId)
